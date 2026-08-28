@@ -27,6 +27,17 @@ function main() {
       }
       break;
     }
+    case "review": {
+      const notes = store.all();
+      if (notes.length === 0) {
+        console.log("No notes to review.");
+        return;
+      }
+      for (const note of notes) {
+        console.log(`Reviewing #${note.id}: ${note.text}`);
+      }
+      break;
+    }
     case "delete": {
       const id = Number(rest[0]);
       const ok = store.remove(id);
@@ -34,7 +45,7 @@ function main() {
       break;
     }
     default:
-      console.log("Commands: add <text> | list | delete <id>");
+      console.log("Commands: add <text> | list | review | delete <id>");
       console.log(`(Session locks after ${config.SESSION_TIMEOUT_MINUTES} minutes of inactivity.)`);
   }
 }
