@@ -38,6 +38,11 @@ function main() {
       }
       break;
     }
+    case "count": {
+      const count = store.all().length;
+      console.log(`You have ${count} note${count === 1 ? "" : "s"}.`);
+      break;
+    }
     case "delete": {
       const id = Number(rest[0]);
       const ok = store.remove(id);
@@ -45,7 +50,7 @@ function main() {
       break;
     }
     default:
-      console.log("Commands: add <text> | list | review | delete <id>");
+      console.log("Commands: add <text> | list | review | count | delete <id>");
       console.log(`(Session locks after ${config.SESSION_TIMEOUT_MINUTES} minutes of inactivity.)`);
   }
 }
