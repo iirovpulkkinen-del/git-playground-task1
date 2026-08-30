@@ -27,6 +27,17 @@ function main() {
       }
       break;
     }
+    case "review": {
+      const notes = store.all();
+      if (notes.length === 0) {
+        console.log("No notes to review.");
+        return;
+      }
+      for (const note of notes) {
+        console.log(`Reviewing #${note.id}: ${note.text}`);
+      }
+      break;
+    }
     case "count": {
       const count = store.all().length;
       console.log(`You have ${count} note${count === 1 ? "" : "s"}.`);
@@ -39,7 +50,7 @@ function main() {
       break;
     }
     default:
-      console.log("Commands: add <text> | list | count | delete <id>");
+      console.log("Commands: add <text> | list | review | count | delete <id>");
       console.log(`(Session locks after ${config.SESSION_TIMEOUT_MINUTES} minutes of inactivity.)`);
   }
 }
