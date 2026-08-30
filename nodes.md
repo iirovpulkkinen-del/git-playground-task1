@@ -1,3 +1,5 @@
+<!-- Sample list for practice purposes; not an exhaustive or ranked list. -->
+
 # Common Indian Boys' Names
 
 1. Aarav
