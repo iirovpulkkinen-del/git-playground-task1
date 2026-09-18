@@ -4,12 +4,23 @@ const config = require("./lib/config");
 
 const [command, ...rest] = process.argv.slice(2);
 
+function printNotes(emptyMessage, formatNote) {
+  const notes = store.all();
+  if (notes.length === 0) {
+    console.log(emptyMessage);
+    return;
+  }
+  for (const note of notes) {
+    console.log(formatNote(note));
+  }
+}
+
 function main() {
   switch (command) {
     case "add": {
       const text = rest.join(" ").trim();
       if (!text) {
-        console.log("Usage: notes add <my content>");
+        console.log("Usage: notes add <text>");
         return;
       }
       const note = store.add(text);
@@ -17,25 +28,11 @@ function main() {
       break;
     }
     case "list": {
-      const notes = store.all();
-      if (notes.length === 0) {
-        console.log("No notes yet. Add one with: notes add <text>");
-        return;
-      }
-      for (const note of notes) {
-        console.log(`#${note.id}  ${note.text}`);
-      }
+      printNotes("No notes yet. Add one with: notes add <text>", (note) => `#${note.id}  ${note.text}`);
       break;
     }
     case "review": {
-      const notes = store.all();
-      if (notes.length === 0) {
-        console.log("No notes to review.");
-        return;
-      }
-      for (const note of notes) {
-        console.log(`Reviewing #${note.id}: ${note.text}`);
-      }
+      printNotes("No notes to review.", (note) => `Reviewing #${note.id}: ${note.text}`);
       break;
     }
     case "count": {

@@ -9,3 +9,7 @@ The diff adds two new commands to `notes.js`: `review` (prints every note prefix
 ## Did it catch the stray change?
 
 Yes — my prediction was correct. Claude flagged the usage-message wording change in `notes.js` as a likely unintended edit, and separately called out `nodes.md` as unrelated content that didn't belong in this change.
+
+## Follow-up fixes
+
+A code review of the PR raised three points, all applied here: the `add` usage string was reverted back to `<text>` so it matches `README.md` and the `list` command's own hint; `list` and `review` now share a `printNotes` helper instead of duplicating the same loop; and the unrelated `nodes.md` file was removed.
